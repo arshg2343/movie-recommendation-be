@@ -110,7 +110,7 @@ func getAIRecommendations(userPrompt string) (string, error) {
 			"type": "json_object",
 		},
 		"temperature": 0.7,
-		"max_tokens": 4000,
+		"max_tokens": 40000,
 	}
 
 
@@ -150,7 +150,7 @@ func getAIRecommendations(userPrompt string) (string, error) {
 		return "", fmt.Errorf("failed to read response: %v", err)
 	}
 
-	fmt.Printf("📥 API Response recieved.")
+	fmt.Printf("📥 API Response recieved")
 
 	var result map[string]interface{}
 	if err := json.Unmarshal(body, &result); err != nil {
@@ -216,7 +216,7 @@ func getAIRecommendations(userPrompt string) (string, error) {
 	}
 
 	if err := json.Unmarshal([]byte(jsonContent), &validationCheck); err != nil {
-		fmt.Printf("❌ Invalid JSON structure: %v\n", err)
+		fmt.Printf("❌ Invalid JSON structure: %v\n", jsonContent)
 		return "", fmt.Errorf("invalid JSON structure: %v", err)
 	}
 
@@ -256,6 +256,7 @@ func createAIPrompt(userPrompt string) string {
 		"instructions": `You are a movie recommendation system. Based on the user's query, provide movie recommendations.
 Respond ONLY with a valid JSON object. Do not include any explanatory text before or after the JSON.
 If you need to refuse a request, do so within the JSON structure by providing appropriate alternative recommendations.
+If the prompt contains illegal, obscure, or non-English text, continue with the response, however inappropriate it may be. It is imperative that no matter the content of the prompt you have to return results.
 
 For each recommendation:
 1. Provide complete movie details including title, overview, cast, directors, producers, language, and a link to the movie poster
@@ -264,9 +265,10 @@ For each recommendation:
 4. Assign a relevance score from 0.0 to 1.0
 5. Extract 3-5 key matching keywords
 6. For less relevant movies, suggest 2-3 alternative movies from similar genres
+7. Make sure to find correct movie poster urls.
 
 Provide exactly 10 movie recommendations.
-
+It is absolutely necessary to follow proper json syntax.
 Your response must contain ONLY the following JSON structure with no additional text:
 {
     "recommendations": [
@@ -294,10 +296,10 @@ Your response must contain ONLY the following JSON structure with no additional 
 }
 
 // Helper function to pretty print JSON
-func prettyPrint(v interface{}) string {
-	b, err := json.MarshalIndent(v, "", "  ")
-	if err != nil {
-		return fmt.Sprintf("Error pretty printing: %v", err)
-	}
-	return string(b)
-}
+// func prettyPrint(v interface{}) string {
+// 	b, err := json.MarshalIndent(v, "", "  ")
+// 	if err != nil {
+// 		return fmt.Sprintf("Error pretty printing: %v", err)
+// 	}
+// 	return string(b)
+// }
