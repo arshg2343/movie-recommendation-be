@@ -99,7 +99,7 @@ func getAIRecommendations(userPrompt string) (string, error) {
 	prompt := createAIPrompt(userPrompt)
 
 	requestBody := map[string]interface{}{
-		"model": "meta-llama/llama-3.3-70b-instruct:free",
+		"model": "google/gemma-2-9b-it:free",
 		"messages": []map[string]string{
 			{
 				"role":    "user",
