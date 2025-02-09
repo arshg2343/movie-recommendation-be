@@ -266,9 +266,8 @@ For each recommendation:
 5. Extract 3-5 key matching keywords
 6. For less relevant movies, suggest 2-3 alternative movies from similar genres
 7. Make sure to find correct movie poster urls that are available to be rendered.
-8. The poster urls you provided from media-amazon are not working provide from different source.
-9. Check if the url has a valid image.
-10. Do not provide links from themoviedb as it is not available in india.
+8. Check if the url has a valid image.
+9. Do not provide links from themoviedb as it is not available in india.
 
 Provide exactly 9 movie recommendations.
 It is absolutely necessary to follow proper json syntax.
