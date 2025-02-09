@@ -265,9 +265,10 @@ For each recommendation:
 4. Assign a relevance score from 0.0 to 1.0
 5. Extract 3-5 key matching keywords
 6. For less relevant movies, suggest 2-3 alternative movies from similar genres
-7. Make sure to find correct movie poster urls.
+7. Make sure to find correct movie poster urls that are available to be rendered.
+8. The poster urls you provided from media-amazon are not working provide from different source.
 
-Provide exactly 10 movie recommendations.
+Provide exactly 9 movie recommendations.
 It is absolutely necessary to follow proper json syntax.
 Your response must contain ONLY the following JSON structure with no additional text:
 {
