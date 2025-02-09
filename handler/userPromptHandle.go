@@ -69,7 +69,7 @@ func UserPromptHandle(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Getting recommendations failed: %v", err)})
 		return
 	}
-	fmt.Printf("✅ Received recommendations:\n%s\n", prettyPrint(recommendations))
+	fmt.Printf("✅ Received recommendations")
 
 	// Parse recommendations to ensure valid JSON
 	var parsedRecs json.RawMessage
@@ -87,7 +87,6 @@ func UserPromptHandle(c *gin.Context) {
 	}
 
 	fmt.Println("\n✅ Sending final response")
-	fmt.Printf("Final Response:\n%s\n", prettyPrint(response))
 	fmt.Println("=== Request Complete ===")
 
 	c.JSON(http.StatusOK, response)
@@ -114,7 +113,6 @@ func getAIRecommendations(userPrompt string) (string, error) {
 		"max_tokens": 4000,
 	}
 
-	fmt.Printf("📤 AI Request Body:\n%s\n", prettyPrint(requestBody))
 
 	jsonBody, err := json.Marshal(requestBody)
 	if err != nil {
@@ -152,7 +150,7 @@ func getAIRecommendations(userPrompt string) (string, error) {
 		return "", fmt.Errorf("failed to read response: %v", err)
 	}
 
-	fmt.Printf("📥 Raw API Response:\n%s\n", prettyPrint(json.RawMessage(body)))
+	fmt.Printf("📥 API Response recieved.")
 
 	var result map[string]interface{}
 	if err := json.Unmarshal(body, &result); err != nil {
@@ -196,7 +194,7 @@ func getAIRecommendations(userPrompt string) (string, error) {
 		return "", fmt.Errorf("failed to extract JSON from content: %v", err)
 	}
 
-	fmt.Printf("✅ Successfully extracted JSON content:\n%s\n", prettyPrint(jsonContent))
+	fmt.Printf("✅ Successfully extracted JSON content")
 
 	// Validate JSON structure
 	var validationCheck struct {
