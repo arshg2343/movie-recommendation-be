@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -128,7 +129,11 @@ func getAIRecommendations(userPrompt string) (string, error) {
 	}
 
     req.Header.Set("Content-Type", "application/json")
-    req.Header.Set("Authorization", "Bearer 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")
+    apiKey := os.Getenv("OPENROUTER_API_KEY")
+    if apiKey == "" {
+        return "", fmt.Errorf("OPENROUTER_API_KEY environment variable is not set")
+    }
+    req.Header.Set("Authorization", "Bearer "+apiKey)    
     req.Header.Set("HTTP-Referer", "https://localhost:8080")
     req.Header.Set("X-Title", "Movie Recommendations")
 
